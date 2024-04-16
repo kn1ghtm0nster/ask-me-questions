@@ -1,0 +1,6 @@
+# .gitignore content
+venv/
+*.pyc
+__pycache__/
+.DS_Store  # macOS specific
+Thumbs.db  # Windows specific
