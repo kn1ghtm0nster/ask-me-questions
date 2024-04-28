@@ -13,8 +13,8 @@ jobs:
       db:
         image: postgres:13
         env:
-          POSTGRES_USER: diego_quintanilla
-          POSTGRES_PASSWORD: ""
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test_ama_db
         ports:
           - 5432:5432
@@ -43,4 +43,4 @@ jobs:
           python manage.py test
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_URL: postgres://diego_quintanilla:@localhost:5432/test_ama_db
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
