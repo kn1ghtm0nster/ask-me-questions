@@ -34,5 +34,5 @@ jobs:
 
       - name: Run tests
         run: |
-          source venv/bin/activate
+          cd back-end
           python manage.py test
