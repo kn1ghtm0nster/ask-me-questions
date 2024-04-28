@@ -21,14 +21,10 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Create Virtual Environment
-        run: /
-          cd back-end
-          python -m venv venv
-
       - name: Install pip dependencies
         run: |
           cd back-end
+          python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
 

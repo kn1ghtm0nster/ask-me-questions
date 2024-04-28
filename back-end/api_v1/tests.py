@@ -5,7 +5,7 @@ from django.test import TestCase
 # TODO: REMOVE THE CODE BELOW. THIS IS DUMMY CODE
 
 
-def add_numbers(num1, num2) -> int or None:
+def add_numbers(num1, num2) -> int or None:  # type: ignore
     if type(num1) is int and type(num2) is int:
         return num1 + num2
     return None
