@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path
 
 from api_v1.views import users_list
+from users.views import SignupView  # signup view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users', users_list, name='users'),
+    path('signup/', SignupView.as_view(), name='signup'),
 ]

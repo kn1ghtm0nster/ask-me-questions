@@ -1,8 +1,9 @@
+from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
 
 
 # User Model
-class User(models.Model):
+class User(AbstractUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
@@ -10,6 +11,9 @@ class User(models.Model):
     role = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
 
 # Category Model
