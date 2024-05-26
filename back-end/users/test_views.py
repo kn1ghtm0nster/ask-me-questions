@@ -19,3 +19,6 @@ def test_signup_view():
     response = client.post(url, data, format='json')
     assert response.status_code == status.HTTP_201_CREATED
     assert 'message' in response.data
+    assert response.data['message'] == 'New user created successfully'
+    assert 'refresh' in response.data
+    assert 'access' in response.data
