@@ -7,3 +7,30 @@ Thumbs.db  # Windows specific
 
 # Django content
 .env
+
+# Python
+*.pyc
+__pycache__/
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# IDEs
+.idea/
+.vscode/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+.coverage
+htmlcov/
