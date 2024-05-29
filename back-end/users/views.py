@@ -39,7 +39,11 @@ class SignupView(APIView):
             }, status=status.HTTP_201_CREATED)
 
         except serializers.ValidationError as e:
-            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
+            data = {
+                'message': 'Error creating new user',
+                'errors': serializer.errors
+            }
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
