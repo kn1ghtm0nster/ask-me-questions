@@ -77,3 +77,65 @@ def test_signup_with_existing_email():
     assert response.data['message'] == 'Error creating new user'
     assert response.data['errors']['email'] == [
         'user with this email already exists.']
+
+
+@pytest.mark.django_db
+def test_signup_with_missing_username():
+    """Test signup route with missing username.
+    """
+
+    client = APIClient()
+    url = reverse('signup')
+    bad_data = {
+        'username': None,
+        'email': 'test@email.com',
+        'password': 'another_useless_password',
+        'company_name': 'test_corp',
+        'role': None
+    }
+
+    response = client.post(url, bad_data, format='json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert response.data['errors']['username'] == [
+        'This field may not be null.']
+
+
+@pytest.mark.django_db
+def test_signup_with_missing_email():
+    """Test signup route with missing email.
+    """
+
+    client = APIClient()
+    url = reverse('signup')
+    bad_data = {
+        'username': 'new_user',
+        'email': None,
+        'password': 'pass23333',
+        'company_name': 'mckesson',
+        'role': 'recruiter'
+    }
+
+    response = client.post(url, bad_data, format='json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert response.data['errors']['email'] == ['This field may not be null.']
+
+
+@pytest.mark.django_db
+def test_signup_view_with_missing_password():
+    """Test the signup view with missing password.
+    """
+
+    client = APIClient()
+    url = reverse('signup')
+    bad_data = {
+        'username': 'new_user2',
+        'email': 'test_email@email.com',
+        'password': None,
+        'company_name': 'test_corp',
+        'role': None
+    }
+
+    response = client.post(url, bad_data, format='json')
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert response.data['errors']['password'] == [
+        'This field may not be null.']
