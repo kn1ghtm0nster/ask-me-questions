@@ -72,7 +72,6 @@ class LoginView(APIView):
             return Response({'error': 'Username and password are required'}, status=HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, username=username, password=password)
-        print(user)
 
         if user is not None:
             token, _ = Token.objects.get_or_create(user=user)
