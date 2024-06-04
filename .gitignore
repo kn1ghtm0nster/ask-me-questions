@@ -11,6 +11,7 @@ Thumbs.db  # Windows specific
 # Python
 *.pyc
 __pycache__/
+*.pytest_cache/
 
 # Environments
 .env
