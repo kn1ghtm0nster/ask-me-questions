@@ -1,9 +1,11 @@
-name: API Tests
+# NOTE: This workflow is used to run tests on the back-end directory of the projet
+#      when a pull request is made when changes are made to the back-end directory.
+name: Back-End Tests
 
 on:
-  push:
-    branches:
-      - "**" # This will run the workflow on push events for all branches
+  pull_request:
+    paths:
+      - "back-end/**" # Run the workflow when changes are made to the back-end directory
 
 jobs:
   test:
@@ -36,11 +38,20 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run unit tests
         run: |
           cd back-end
           source venv/bin/activate
-          python manage.py test
+          pytest **/tests.py
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_ama_db
+
+      - name: Run integration tests
+        run: /
+          cd back-end
+          source venv/bin/activate
+          pytest **/test_views.py
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_ama_db
